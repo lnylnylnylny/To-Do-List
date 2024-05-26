@@ -2,7 +2,7 @@ spring:
   datasource:
     url: "jdbc:mysql://localhost/todolist" # jdbc(java database collector): 데이터베이스 선택
     username: "root"
-    password: "12312300"
+    password: "1203"
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
