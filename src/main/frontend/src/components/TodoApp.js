@@ -12,7 +12,7 @@ const TodoApp = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/task');
+      const response = await axios.get('/task');
       setTodos(response.data);
     } catch (error) {
       console.error('Error fetching tasks', error);
@@ -22,7 +22,7 @@ const TodoApp = () => {
   const addTodo = async () => {
     if (newTaskName.trim() === '') return;
     try {
-      await axios.post('http://localhost:8080/task', { name: newTaskName, isCompleted: false });
+      await axios.post('/task', { name: newTaskName, isCompleted: false });
       fetchTasks();
       setNewTaskName('');
     } catch (error) {
@@ -33,7 +33,7 @@ const TodoApp = () => {
   const toggleTodo = async (id) => {
     try {
       const todo = todos.find(t => t.id === id);
-      await axios.put('http://localhost:8080/task/isComplete', { id, isCompleted: !todo.isCompleted });
+      await axios.put('/task/isComplete', { id, isCompleted: !todo.isCompleted });
       fetchTasks();
     } catch (error) {
       console.error('Error toggling task', error);
@@ -42,7 +42,7 @@ const TodoApp = () => {
 
   const deleteTodo = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/task?id=${id}`);
+      await axios.delete(`/task?id=${id}`);
       fetchTasks();
     } catch (error) {
       console.error('Error deleting task', error);
@@ -52,7 +52,7 @@ const TodoApp = () => {
   const updateTodo = async (id, newText) => {
     if (newText.trim() === '') return;
     try {
-      await axios.put('http://localhost:8080/task/name', { id, name: newText });
+      await axios.put('/task/name', { id, name: newText });
       fetchTasks();
     } catch (error) {
       console.error('Error updating task', error);
