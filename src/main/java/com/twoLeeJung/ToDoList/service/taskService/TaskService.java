@@ -29,7 +29,7 @@ public class TaskService {
     @Transactional(readOnly = true)
     public List<TaskResponse> getTasks() {
         return taskRepository.findAll().stream()
-                .map(TaskResponse::new)
+                .map(task -> new TaskResponse(task.getId(), task.getName(), task.getIsCompleted()))
                 .collect(Collectors.toList());
     }
 
@@ -39,6 +39,7 @@ public class TaskService {
                 .orElseThrow(IllegalArgumentException::new);
 
         task.updateName(request.getName());
+        taskRepository.save(task);
     }
 
     @Transactional
@@ -47,6 +48,7 @@ public class TaskService {
                 .orElseThrow(IllegalArgumentException::new);
 
         task.updateIsCompleted(request.isCompleted());
+        taskRepository.save(task);
     }
 
     @Transactional
